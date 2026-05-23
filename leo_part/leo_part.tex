@@ -1,2 +1,12 @@
-\chapter{ok}
-ok
+\chapter{Changes in python script}
+In order to make the measurements as described in the Introduction section, this time the value of the central barrier gate
+is swept in a range that goes from $0.37$ V to $0.42$ V, taking 6 equally spaced values within this range:
+\begin{lstlisting}[language=Python, label={init}, frame=single, framesep=8pt ]
+    V_Barrier_Vec_2 = np.linspace(0.37,0.42, 6)
+\end{lstlisting}
+For each value of the central barrier gate, the program solves the non-linear Poisson equation and subsequently the Schrodinger equation, in order to obtain the energy levels of the system analyzed.
+The workflow of the program consists of the following procedure:
+\begin{itemize}
+    \item Definition of the materials assigning to each region of the system their corresponding physical properties, as in the previous laboratories.
+    \item  me so rotto il cazzo
+\end{itemize}
