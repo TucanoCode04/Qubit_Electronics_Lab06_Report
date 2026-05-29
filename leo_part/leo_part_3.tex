@@ -57,15 +57,22 @@ In our simulation, the energy splittings between the ground states of the two do
         4.19 & 7.20 \\ \hline
     \end{tabular}
 \end{table}
-We then fitted the experimental data to an exponential function of the form:
-\begin{equation}
-    y = a \cdot e^{b \cdot x}
-\end{equation}
-where $y$ in this case represents the energy splitting and $x$ is the barrier voltage. The showed function has been optimized to best fit the experimental data and the parameters $a$ and $b$ have been determined, resulting in $5.11e-10$ and $22.79$ respectively.\\
-The plot of the fitted curve and the experimental data is shown in figure \ref{plot}:
+According to the WKB (Wentzel-Kramers-Brillouin) approximation as previously described, this energy splitting follows an exponential growth as the barrier height decreases. The python script used in this laboratory and commented here aims to verify this behavior by fitting the six numerical data points with an exponential function, defined as follows:
+
+\begin{lstlisting}[language=Python, caption={Exponential fit function and curve fitting procedure.}, frame=single, framesep=8pt]
+def exp_fun(x, a, b):
+    return a * np.exp(b * x)
+
+param_opt, param_cov = curve_fit(exp_fun, x_data, y_data, p0=[y_data[0], 10])
+\end{lstlisting}
+The showed function has been optimized to best fit the experimental data and the parameters $a$ and $b$ have been determined, resulting in $5.11e-10$ and $22.79$ respectively.\\
+Finally, the optimized fitting curve was plotted alongside the six numerical data points to evaluate the consistency and accuracy of the WKB approximation for this specific system configuration.
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{images/plot.png}
-    \caption{Plot of the fitted exponential compared with experimental data}
-    \label{plot}
+    \includegraphics[width=0.8\textwidth]{images/plot.png} 
+    \caption{Plot of the exponential fit alongside the six numerical data points, illustrating the increase in energy splitting as the central barrier height decreases.}
+    \label{fig:plot1}
 \end{figure}
+
+As shown in Fig.~\ref{fig:plot1}, the exponential fit matches the numerical data reasonably well. However, despite the data points appearing somewhat linear, this is primarily due to the limited number of sampled points, which is insufficient to fully resolve the true exponential behavior over a wider range.
