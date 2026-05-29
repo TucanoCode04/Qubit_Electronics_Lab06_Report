@@ -2,7 +2,7 @@
 \contentsline {chapter}{\numberline {1}Introduction}{1}{}%
 \contentsline {chapter}{\numberline {2}Changes in python script}{1}{}%
 \contentsline {chapter}{\numberline {3}Analysis of the results}{1}{}%
-\contentsline {section}{\numberline {3.1}Physical setting}{2}{}%
-\contentsline {section}{\numberline {3.2}Energy splittings and fitting of the results}{2}{}%
+\contentsline {section}{\numberline {3.1}Theoretical framework}{2}{}%
+\contentsline {section}{\numberline {3.2}Energy splittings and fitting of the results}{3}{}%
 \contentsline {chapter}{\numberline {4}Changes in python script}{3}{}%
-\contentsline {chapter}{\numberline {5}Python for the analysis of the results}{3}{}%
+\contentsline {chapter}{\numberline {5}Python for the analysis of the results}{4}{}%

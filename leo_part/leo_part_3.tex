@@ -1,6 +1,47 @@
 \chapter{Analysis of the results}
-\section{Physical setting}
-here explain all the physical concerns of the system, like start from describing the system as 2 quantum systems psir and psil, then write the hamiltonian and describe what are the matrix elements. explain in detail the t element (offdiagonal term) and then introduce the theory of WKB and how it can be used to recover that term. then see from the matrix that the splitting is proportional to t and from WKB that t is proportional to the exponenital of the V applied --> so the splitting is proportional to the exponential o the V applied. Then show the results (next section) and after see the fit and comment on how the fit is close to the expiremntal results.
+\section{Theoretical framework}
+To properly interpret the numerical results of the simulated double quantum dot, it is essential to establish the underlying physical framework of the system.
+We describe the system using a localized basis consisting of the ground state wavefunctions of the individual, isolated quantum dots. Let $|L\rangle$ and $|R\rangle$ represent the states strictly localized in the left and right dot, with corresponding spatial wavefunctions $\psi_L(\mathbf{r})$ and $\psi_R(\mathbf{r})$.\\
+By projecting the full Hamiltonian $\hat{H}$ on this two dimensional subspace, we obtain the following matrix representation:
+\begin{equation}
+    H = \begin{pmatrix} 
+    \langle L | \hat{H} | L \rangle & \langle L | \hat{H} | R \rangle \\ 
+    \langle R | \hat{H} | L \rangle & \langle R | \hat{H} | R \rangle 
+    \end{pmatrix} 
+    = \begin{pmatrix} 
+    \varepsilon_L & t \\ 
+    t^* & \varepsilon_R 
+    \end{pmatrix}
+\end{equation}
+where $\varepsilon_L$ and $\varepsilon_R$ are the energies (eigenvalues) of the isolated left and right states, so the energies of the two dots. The off-diagonal term $t$. called tunneling matrix element, represents the coupling between the two states, that it how much the two eigenfunctions overlap. This latter term is crucial for understanding the behavior of the system in the analyzed regime, where the barrier between the two dots is reduced, allowing for a coupling between the two states.\\
+
+The $t$ element is defined as:
+\begin{equation}
+    t = \langle L | \hat{H} | R \rangle \approx \int \psi_L^*(\mathbf{r}) \Delta V(\mathbf{r}) \psi_R(\mathbf{r}) \, d\mathbf{r}
+\end{equation}
+where $\Delta V(\mathbf{r})$ is the potential barrier separating the two dots. This integral is strictly non-zero only because the exponentially decaying tails of $\psi_L$ and $\psi_R$ overlap within the classically forbidden barrier region, so the region where the barrier between them is the highest.
+
+To obtain a quantitative, analytical understanding of $t$, we rely on the Wentzel-Kramers-Brillouin (WKB) approximation. According to WKB theory, the transmission probability through a potential barrier scales exponentially with the barrier's geometric and energetic profile. For an energy barrier of effective width $w$ and height $V_b$, the tunnel coupling can be approximated as:
+\begin{equation}
+    t \propto \exp\left( - \frac{w}{\hbar} \sqrt{2m^* V_b} \right)
+\end{equation}
+In our specific situation, the barrier height $V_b$ is linearly modulated by the voltage applied to the central barrier gate, $V_G$. Using the lever-arm parameter $\alpha$, the effective barrier height is $V_b(V_G) = V_{b,0} - e\alpha V_G$. Substituting this into the WKB expression reveals that the tunnel coupling grows exponentially as the applied gate voltage increases (i.e., as the barrier is lowered).
+When the system is tuned to perfect resonance ($\varepsilon_L = \varepsilon_R = \varepsilon_0$) using the plunger gates, the Hamiltonian becomes symmetric. Diagonalizing this matrix yields two hybridized eigenstates: a symmetric bonding state, with an eigenvalue of $E_0 = \varepsilon_0 - |t|$ and an antisymmetric antibonding state with corresponding eigenvalue $E_1 = \varepsilon_0 + |t|$. The energy splitting between these two different eigenstates is given by:
+\begin{equation}
+    \Delta E = E_1 - E_0 = 2|t|
+\end{equation}
+in the case of a perfectly symmetric states, but in our case where the two separated dots are not perfectly identical, the splitting can be write also as:
+\begin{equation}
+    \Delta E = \sqrt{(E_b - E_a)^2 + (2|t|)^2}
+\end{equation}
+where $E_a$ and $E_b$ are the energies of the two isolated dots.
+Combining this result with the WKB approximation, we obtain the fundamental relation governing the tuning of the device:
+\begin{equation}
+    \Delta E \propto \exp( \gamma \cdot V_G )
+\end{equation}
+where $\gamma$ is a positive constant grouping the structural parameters of the barrier. This theoretical model predicts that the energy splitting will exhibit a pure exponential dependence on the inter-dot barrier voltage.
+
+
 \section{Energy splittings and fitting of the results}
 In our simulation, the energy splittings between the ground states of the two dots are reported in the following table:
 \begin{table}[H]
