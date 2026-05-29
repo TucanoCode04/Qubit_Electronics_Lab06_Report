@@ -32,3 +32,38 @@ for idx, V_barrier_2 in enumerate(V_Barrier_Vec_2):
     dot.print_energies()
     \end{lstlisting}
 \end{itemize}
+
+What we obtain at the end, in th matrix $energy_arr$, are the first five energy eigenvalues given by the Schrödinger equation for each physical setup corresponding to the different values of the central barrier gate. After that, the program calculates the difference between the energy of the ground state and the energy of the first excited state ($E_1 - E_0$).
+\begin{lstlisting}[language=Python, frame=single, framesep=8pt ]
+        splitting = energy_arr[:,2] - energy_arr[:,1] 
+\end{lstlisting}
+
+This splitting represents the energy distance between the ground states of the two separate quantum dots for each value of the barrier.
+
+\chapter{Python for the analysis of the results}
+
+The data vector obtained from the previous script contains six pairs of data; for each voltage value of the central barrier gate, we computed the energy splitting between the first two energy levels of the system. 
+
+At low bias, which corresponds to a high potential barrier, the two quantum dots are isolated from one another. Consequently, their first energy levels are nearly degenerate, so the delta is low. As the barrier height is reduced by varying the gate voltage, the dots begin to interact. This coupling causes the respective wavefunctions to overlap, which breaks the degeneracy and forces the two energy levels to split. 
+
+According to the WKB (Wentzel-Kramers-Brillouin) approximation, this energy splitting follows an exponential growth as the barrier height decreases. While a detailed physical derivation is provided in the theoretical section of this work, the python script presented here aims to verify this behavior by fitting the six numerical data points with an exponential function, defined as follows:
+
+\begin{lstlisting}[language=Python, caption={Exponential fit function and curve fitting procedure.}]
+def exp_fun(x, a, b):
+    # a: zero-voltage splitting pre-factor; b: tunneling sensitivity (related to m* and barrier width)
+    return a * np.exp(b * x)
+
+# Perform the exponential fit using scipy.optimize.curve_fit
+param_opt, param_cov = curve_fit(exp_fun, x_data, y_data, p0=[y_data[0], 10])
+\end{lstlisting}
+
+Finally, the optimized fitting curve was plotted alongside the six numerical data points to evaluate the consistency and accuracy of the WKB approximation for this specific system configuration.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{leo_part/Plot_lab6.png} 
+    \caption{Plot of the exponential fit alongside the six numerical data points, illustrating the increase in energy splitting as the central barrier height decreases.}
+    \label{fig:plot}
+\end{figure}
+
+As shown in Fig.~\ref{fig:plot}, the exponential fit matches the numerical data reasonably well. However, despite the data points appearing somewhat linear, this is primarily due to the limited number of sampled points, which is insufficient to fully resolve the true exponential behavior over a wider range.
